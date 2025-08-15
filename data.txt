@@ -1,0 +1,2 @@
+private_key_near|bearer_token
+private_key_near_01|bearer_token_02

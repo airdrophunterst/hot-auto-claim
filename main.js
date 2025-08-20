@@ -14,6 +14,7 @@ const moment = require("moment");
 const XLSX = require("xlsx");
 const querystring = require("querystring");
 const BigNumber = require("bignumber.js");
+const nacl = require("tweetnacl");
 const { v4: uuid } = require("uuid");
 const { jwtDecode } = require("jwt-decode");
 const Base58 = require("bs58").default;
@@ -306,7 +307,7 @@ class ClientAPI {
           refferals: 0,
           inviter: "nguyenhung2310.tg",
           village: "439885.village.hot.tg",
-          last_claim: last_claim,
+          last_claim: last_claim || null,
           firespace: 0,
           boost: 10,
           storage: 20,
@@ -551,7 +552,7 @@ class ClientAPI {
 
     await this.connectRPC();
     let userData = await this.getUserInfo();
-    let claimStatusData = await this.getClaimStatus(userData.last_claim);
+    let claimStatusData = await this.getClaimStatus(userData?.last_claim);
 
     const blNear = await this.getNearBalance();
     const blHot = await this.getHotBalance();
